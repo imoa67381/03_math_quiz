@@ -12,14 +12,14 @@ class Start:
 
         # Math Quiz Heading (row 0)
         self.math_quiz_label = Label(self.start_frame, text="Math Quiz Game",
-                                     font="Arial 19 bold")
+                                     font="Arial 19 bold",
+                                     padx=10, pady=10)
         self.math_quiz_label.grid(row=0)
 
         # Initial Instructions (row 1)
 
-        math_quiz_instructions = "Please enter numbers between -10 and 50 in this box " \
-                                 "below. Then enter the number of questions you want. " \
-                                 "Then choose Addition or Subtraction"
+        math_quiz_instructions = "Please enter numbers between -10 and 50 in this boxes " \
+                                 "below."
 
         self.math_quiz_label = Label(self.start_frame, font="Arial 10 italic",
                                      text=math_quiz_instructions,
@@ -29,9 +29,11 @@ class Start:
         # Entry box... (row 2)
         self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold")
         self.amount_questions_entry.grid(row=2)
+        self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold")
+        self.amount_questions_entry.grid(row=2, column=1)
 
         # button frame (row 3)
-        self.buttons_frame =Frame(self.start_frame)
+        self.buttons_frame = Frame(self.start_frame)
         self.buttons_frame.grid(row=3)
 
         # Buttons go here...
@@ -54,13 +56,13 @@ class Start:
         self.help_button.grid(row=4, pady=10)
 
     def to_game(self, stakes):
-        starting_balance = self.start_amount_entry.get()
+        starting_questions = self.amount_questions_entry.get()
 
 
 class Game:
-    def __init__(self, partner, buttons, starting_balance):
+    def __init__(self, partner, buttons, starting_questions):
         print(buttons)
-        print(starting_balance)
+        print(starting_questions)
 
 
 # main routine
