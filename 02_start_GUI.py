@@ -18,8 +18,7 @@ class Start:
 
         # Initial Instructions (row 1)
 
-        math_quiz_instructions = "Please enter numbers between -10 and 50 in this boxes " \
-                                 "below."
+        math_quiz_instructions = "Enter numbers between -20 and 50 below "
 
         self.math_quiz_label = Label(self.start_frame, font="Arial 10 italic",
                                      text=math_quiz_instructions,
@@ -27,14 +26,16 @@ class Start:
         self.math_quiz_label.grid(row=1)
 
         # Entry box... (row 2)
-        self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold")
-        self.amount_questions_entry.grid(row=2)
-        self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold")
-        self.amount_questions_entry.grid(row=2, column=1)
+        self.questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
+        self.questions_entry.grid(row=2)
 
-        # button frame (row 3)
+        # Number of questions box... (row 3)
+        self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
+        self.amount_questions_entry.grid(row=3)
+
+        # button frame (row 4)
         self.buttons_frame = Frame(self.start_frame)
-        self.buttons_frame.grid(row=3)
+        self.buttons_frame.grid(row=4)
 
         # Buttons go here...
         button_font = "Arial 12 bold"
@@ -51,12 +52,12 @@ class Start:
         self.subtraction_button.grid(row=0, column=1, padx=5, pady=10)
 
         # Help Button
-        self.help_button = Button(self.start_frame, text="How to Play",
+        self.help_button = Button(self.start_frame, text="Help",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=4, pady=10)
+        self.help_button.grid(row=5, pady=10)
 
     def to_game(self, stakes):
-        starting_questions = self.amount_questions_entry.get()
+        starting_questions = self.questions_entry.get()
 
 
 class Game:
