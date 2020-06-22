@@ -12,11 +12,11 @@ class Start:
 
         # Math Quiz Heading (row 0)
         self.math_quiz_label = Label(self.start_frame, text="Math Quiz Game",
-                                     font="Arial 19 bold",
+                                     font="Arial 17 bold",
                                      padx=10, pady=10)
         self.math_quiz_label.grid(row=0)
 
-        # Initial Instructions (row 1)
+        # Initial Instructions for numbers used in questions(row 1)
 
         math_quiz_instructions = "Enter numbers between -20 and 50 below "
 
@@ -24,6 +24,8 @@ class Start:
                                      text=math_quiz_instructions,
                                      wrap=275, justify=LEFT, padx=10, pady=10)
         self.math_quiz_label.grid(row=1)
+
+        # Initial Instructions for amount of questions (row 3)
 
         math_quiz_instructions = "Enter amount of questions below "
 
@@ -33,7 +35,7 @@ class Start:
         self.math_quiz_label.grid(row=3)
 
         # Entry box... (row 2)
-        self.questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
+        self.questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=3)
         self.questions_entry.grid(row=2)
 
         # Number of questions box... (row 3)
@@ -59,7 +61,7 @@ class Start:
         self.subtraction_button.grid(row=0, column=1, padx=5, pady=10)
 
         # Help Button
-        self.help_button = Button(self.start_frame, text="Help",
+        self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
         self.help_button.grid(row=6, pady=10)
 
