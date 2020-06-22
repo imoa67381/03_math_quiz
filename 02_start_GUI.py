@@ -25,17 +25,24 @@ class Start:
                                      wrap=275, justify=LEFT, padx=10, pady=10)
         self.math_quiz_label.grid(row=1)
 
+        math_quiz_instructions = "Enter amount of questions below "
+
+        self.math_quiz_label = Label(self.start_frame, font="Arial 10 italic",
+                                     text=math_quiz_instructions,
+                                     wrap=275, justify=LEFT, padx=10, pady=10)
+        self.math_quiz_label.grid(row=3)
+
         # Entry box... (row 2)
         self.questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
         self.questions_entry.grid(row=2)
 
         # Number of questions box... (row 3)
         self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
-        self.amount_questions_entry.grid(row=3)
+        self.amount_questions_entry.grid(row=4)
 
         # button frame (row 4)
         self.buttons_frame = Frame(self.start_frame)
-        self.buttons_frame.grid(row=4)
+        self.buttons_frame.grid(row=5)
 
         # Buttons go here...
         button_font = "Arial 12 bold"
