@@ -61,7 +61,7 @@ class Start:
         # Help Button
         self.help_button = Button(self.start_frame, text="Help",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=5, pady=10)
+        self.help_button.grid(row=6, pady=10)
 
     def to_game(self, stakes):
         starting_questions = self.questions_entry.get()
