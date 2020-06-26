@@ -61,6 +61,13 @@ class Game:
                                    pady=10)
         self.heading_label.grid(row=0)
 
+        # Questions Label
+        self.questions_frame = Frame(self.game_frame)
+        self.questions_frame.grid(row=1)
+
+        self.questions_label = Label(self.game_frame, text="")
+        self.questions_label.grid(row=2)
+
 
 # main routine
 if __name__ == "__main__":
