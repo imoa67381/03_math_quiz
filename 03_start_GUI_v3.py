@@ -25,11 +25,6 @@ class Start:
                                      wrap=275, justify=LEFT, padx=10, pady=10)
         self.math_quiz_label.grid(row=1)
 
-        self.amount_error_label = Label(self.start_frame, fg="maroon",
-                                        text="", font="Arial 10 bold", wrap=275,
-                                        justify=LEFT)
-        self.amount_error_label.grid(row=2, columnspan=2, pady=5)
-
         # Entry box... (row 2)
         self.entry_error_frame = Frame(self.start_frame)
         self.entry_error_frame.grid(row=2)
@@ -43,6 +38,11 @@ class Start:
         self.high_num_entry = Entry(self.entry_error_frame, font="Arial 19 bold", width=3)
         self.high_num_entry.grid(row=0, column=2)
 
+        self.entry_error_label = Label(self.start_frame, fg="maroon",
+                                       text="", font="Arial 10 bold", wrap=275,
+                                       justify=LEFT)
+        self.entry_error_label.grid(row=3, columnspan=2, pady=5)
+
         # Initial Instructions for amount of questions (row 3)
 
         math_quiz_instructions = "Enter amount of questions below "
@@ -50,20 +50,20 @@ class Start:
         self.math_quiz_label = Label(self.start_frame, font="Arial 11 italic",
                                      text=math_quiz_instructions,
                                      wrap=275, justify=LEFT, padx=10, pady=10)
-        self.math_quiz_label.grid(row=3)
+        self.math_quiz_label.grid(row=4)
 
         # Number of questions entry box... (row 4)
         self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
-        self.amount_questions_entry.grid(row=4)
+        self.amount_questions_entry.grid(row=5)
 
         self.amount_error_label = Label(self.start_frame, fg="maroon",
                                         text="", font="Arial 10 bold", wrap=275,
                                         justify=LEFT)
-        self.amount_error_label.grid(row=5, columnspan=2, pady=5)
+        self.amount_error_label.grid(row=6, columnspan=2, pady=5)
 
         # button frame (row 6)
         self.buttons_frame = Frame(self.start_frame)
-        self.buttons_frame.grid(row=6)
+        self.buttons_frame.grid(row=7)
 
         # Buttons go here...
         button_font = "Arial 15 bold"
@@ -71,22 +71,27 @@ class Start:
         self.addition_button = Button(self.buttons_frame, text="Addition",
                                       command=lambda: self.to_game(1),
                                       font=button_font, bg="MistyRose2", width=10)
-        self.addition_button.grid(row=6, column=1, padx=5, pady=10)
+        self.addition_button.grid(row=8, column=1, padx=5, pady=10)
 
         # Subtraction button...
         self.subtraction_button = Button(self.buttons_frame, text="Subtraction",
                                          command=lambda: self.to_game(2),
                                          font=button_font, bg="PeachPuff", width=10)
-        self.subtraction_button.grid(row=7, column=1, padx=5, pady=10)
+        self.subtraction_button.grid(row=9, column=1, padx=5, pady=10)
 
         # Disable all stakes buttons at start
         self.addition_button = Button(state=DISABLED)
         self.subtraction_button = Button(state=DISABLED)
 
-        # Help Button (row 8)
+        self.amount_error_label = Label(self.start_frame, fg="maroon",
+                                        text="", font="Arial 10 bold", wrap=275,
+                                        justify=LEFT)
+        self.amount_error_label.grid(row=10, columnspan=2, pady=5)
+
+        # Help Button (row 11)
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=8, pady=10)
+        self.help_button.grid(row=11, pady=10)
 
     def check_num(self):
         starting_questions = self.amount_questions_entry.get()
@@ -188,10 +193,8 @@ class Start:
 
     def to_game(self, buttons):
         starting_questions = self.amount_questions_entry.get()
-        starting_low_num = self.low_num_entry.get()
-        starting_high_num = self.high_num_entry.get()
 
-        Game(self, buttons, starting_questions, starting_low_num, starting_high_num)
+        Game(self, buttons, starting_questions)
 
         # hide start up window
         root.withdraw
@@ -226,55 +229,13 @@ class Start:
             self.amount_error_label.config(text=error_feedback)
 
         else:
-            Game(self, buttons, starting_questions, starting_low_num, starting_high_num)
-
-        # change background to white (for testing purposes) ...
-        self.low_num_entry.config(bg="white")
-        self.entry_error_frame.config(text="")
-
-        try:
-            starting_low_num = int(starting_low_num)
-
-            if starting_low_num < -20:
-                has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is -20"
-        except ValueError:
-            has_errors = "yes"
-            error_feedback = "Please enter a number (no text / decimals)"
-
-        if has_errors == "yes":
-            self.low_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
-
-        # change background to white (for testing purposes) ...
-        self.high_num_entry.config(bg="white")
-        self.entry_error_frame.config(text="")
-
-
-        try:
-            starting_high_num = int(starting_high_num)
-
-            if starting_high_num > 50:
-                has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
-                                 "is 50."
-        except ValueError:
-            has_errors = "yes"
-            error_feedback = "Please enter a number (no text / decimals)"
-
-        if has_errors == "yes":
-            self.low_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
+            Game(self, buttons, starting_questions)
 
 
 class Game:
-    def __init__(self, partner, buttons, starting_questions, starting_low_num, starting_high_num):
+    def __init__(self, partner, buttons, starting_questions):
         print(buttons)
         print(starting_questions)
-        print(starting_low_num)
-        print(starting_high_num)
-
 
 # main routine
 if __name__ == "__main__":
