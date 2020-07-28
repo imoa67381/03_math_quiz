@@ -192,9 +192,25 @@ class Start:
             self.entry_error_frame.config(text=error_feedback)
 
     def to_game(self, buttons):
-        starting_questions = self.amount_questions_entry.get()
 
-        Game(self, buttons, starting_questions)
+        # get data from entry boxes
+
+        # number of questions
+        starting_questions = self.amount_questions_entry.get()
+        starting_questions = int(starting_questions)
+        print("starting questions to check", starting_questions)
+
+        # low number
+        starting_low_num = self.low_num_entry.get()
+        starting_low_num = int(starting_low_num)
+        print("low num questions to check", starting_low_num)
+
+        # high number
+        starting_high_num = self.high_num_entry.get()
+        starting_high_num = int(starting_high_num)
+        print("high num questions to check", starting_high_num)
+
+        # Game(self, buttons, starting_questions)
 
         # hide start up window
         root.withdraw
@@ -219,6 +235,14 @@ class Start:
                 has_errors = "yes"
                 error_feedback = "Too high! The highest you can use " \
                                  "is 50."
+            elif starting_low_num < -20:
+                has_errors = "yes"
+                error_feedback = "Sorry the least you " \
+                                 "can start with is -20"
+            elif starting_high_num > 50:
+                has_errors = "yes"
+                error_feedback = "Too high! The highest you can use " \
+                                 "is 50."
 
         except ValueError:
             has_errors = "yes"
@@ -234,8 +258,9 @@ class Start:
 
 class Game:
     def __init__(self, partner, buttons, starting_questions):
-        print(buttons)
-        print(starting_questions)
+        print("operation", buttons)
+        print("num questions", starting_questions)
+
 
 # main routine
 if __name__ == "__main__":
