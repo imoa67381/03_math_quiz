@@ -43,7 +43,7 @@ class Start:
                                        justify=LEFT)
         self.entry_error_label.grid(row=3, columnspan=2, pady=5)
 
-        # Initial Instructions for amount of questions (row 3)
+        # Initial Instructions for amount of questions (row 4)
 
         math_quiz_instructions = "Enter amount of questions below "
 
@@ -52,7 +52,7 @@ class Start:
                                      wrap=275, justify=LEFT, padx=10, pady=10)
         self.math_quiz_label.grid(row=4)
 
-        # Number of questions entry box... (row 4)
+        # Number of questions entry box... (row 5)
         self.amount_questions_entry = Entry(self.start_frame, font="Arial 19 bold", width=2)
         self.amount_questions_entry.grid(row=5)
 
@@ -61,7 +61,7 @@ class Start:
                                         justify=LEFT)
         self.amount_error_label.grid(row=6, columnspan=2, pady=5)
 
-        # button frame (row 6)
+        # button frame (row 7)
         self.buttons_frame = Frame(self.start_frame)
         self.buttons_frame.grid(row=7)
 
@@ -95,6 +95,8 @@ class Start:
 
     def check_num(self):
         starting_questions = self.amount_questions_entry.get()
+        starting_low_num = self.low_num_entry.get()
+        starting_high_num = self.high_num_entry.get()
 
         # Set error background colours (and assume that there are no
         # errors at the start...
@@ -102,6 +104,10 @@ class Start:
         has_errors = "no"
 
         # change background to white (for testing purposes) ...
+        self.low_num_entry.config(bg="white")
+        self.entry_error_frame.config(text="")
+        self.high_num_entry.config(bg="white")
+        self.entry_error_frame.config(text="")
         self.amount_questions_entry.config(bg="white")
         self.amount_error_label.config(text="")
 
@@ -110,9 +116,19 @@ class Start:
         self.subtraction_button.config(state=DISABLED)
 
         try:
+            starting_low_num = int(starting_low_num)
+            starting_high_num = int(starting_high_num)
             starting_questions = int(starting_questions)
 
-            if starting_questions < 0:
+            if starting_low_num < -20:
+                has_errors = "yes"
+                error_feedback = "Sorry the least you " \
+                                 "can start with is -20"
+            elif starting_high_num > 50:
+                has_errors = "yes"
+                error_feedback = "Too high! The highest you can use " \
+                                 "is 50."
+            elif starting_questions < 0:
                 has_errors = "yes"
                 error_feedback = "Sorry the least you " \
                                  "can start with is 1"
@@ -126,70 +142,12 @@ class Start:
             error_feedback = "Please enter a number (no text / decimals)"
 
         if has_errors == "yes":
+            self.low_num_entry.config(bg=error_back)
+            self.entry_error_frame.config(text=error_feedback)
+            self.high_num_entry.config(bg=error_back)
+            self.entry_error_frame.config(text=error_feedback)
             self.amount_questions_entry.config(bg=error_back)
             self.amount_error_label.config(text=error_feedback)
-
-    def check_low(self):
-        starting_low_num = self.low_num_entry.get()
-
-        # Set error background colours (and assume that there are no
-        # errors at the start...
-        error_back = "#ffafaf"
-        has_errors = "no"
-
-        # change background to white (for testing purposes) ...
-        self.low_num_entry.config(bg="white")
-        self.entry_error_frame.config(text="")
-
-        # Disable all operations button in case user changes mind and
-        self.addition_button.config(state=DISABLED)
-        self.subtraction_button.config(state=DISABLED)
-
-        try:
-            starting_low_num = int(starting_low_num)
-
-            if starting_low_num < -20:
-                has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is -20"
-        except ValueError:
-            has_errors = "yes"
-            error_feedback = "Please enter a number (no text / decimals)"
-
-        if has_errors == "yes":
-            self.low_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
-
-    def check_high(self):
-        starting_high_num = self.high_num_entry.get()
-
-        # Set error background colours (and assume that there are no
-        # errors at the start...
-        error_back = "#ffafaf"
-        has_errors = "no"
-
-        # change background to white (for testing purposes) ...
-        self.high_num_entry.config(bg="white")
-        self.entry_error_frame.config(text="")
-
-        # Disable all operations button in case user changes mind and
-        self.addition_button.config(state=DISABLED)
-        self.subtraction_button.config(state=DISABLED)
-
-        try:
-            starting_high_num = int(starting_high_num)
-
-            if starting_high_num > 50:
-                has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
-                                 "is 50."
-        except ValueError:
-            has_errors = "yes"
-            error_feedback = "Please enter a number (no text / decimals)"
-
-        if has_errors == "yes":
-            self.low_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
 
     def to_game(self, buttons):
 
@@ -221,25 +179,31 @@ class Start:
         has_errors = "no"
 
         # change background to white (for testing purposes) ...
+        self.low_num_entry.config(bg="white")
+        # self.entry_error_frame.config(text="")
+        self.high_num_entry.config(bg="white")
+        # self.entry_error_frame.config(text="")
         self.amount_questions_entry.config(bg="white")
         self.amount_error_label.config(text="")
 
         try:
+            starting_low_num = int(starting_low_num)
+            starting_high_num = int(starting_high_num)
             starting_questions = int(starting_questions)
 
-            if starting_questions < 0:
-                has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is 1"
-            elif starting_questions > 50:
-                has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
-                                 "is 50."
-            elif starting_low_num < -20:
+            if starting_low_num < -20:
                 has_errors = "yes"
                 error_feedback = "Sorry the least you " \
                                  "can start with is -20"
             elif starting_high_num > 50:
+                has_errors = "yes"
+                error_feedback = "Too high! The highest you can use " \
+                                 "is 50."
+            elif starting_questions < 0:
+                has_errors = "yes"
+                error_feedback = "Sorry the least you " \
+                                 "can start with is 1"
+            elif starting_questions > 50:
                 has_errors = "yes"
                 error_feedback = "Too high! The highest you can use " \
                                  "is 50."
@@ -249,6 +213,10 @@ class Start:
             error_feedback = "Please enter a number (no text/ decimals)"
 
         if has_errors == "yes":
+            self.low_num_entry.config(bg=error_back)
+            self.entry_error_frame.config(text=error_feedback)
+            self.high_num_entry.config(bg=error_back)
+            self.entry_error_frame.config(text=error_feedback)
             self.amount_questions_entry.config(bg=error_back)
             self.amount_error_label.config(text=error_feedback)
 
