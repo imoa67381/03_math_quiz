@@ -83,15 +83,10 @@ class Start:
         self.addition_button = Button(state=DISABLED)
         self.subtraction_button = Button(state=DISABLED)
 
-        self.amount_error_label = Label(self.start_frame, fg="maroon",
-                                        text="", font="Arial 10 bold", wrap=275,
-                                        justify=LEFT)
-        self.amount_error_label.grid(row=10, columnspan=2, pady=5)
-
-        # Help Button (row 11)
+        # Help Button (row 10)
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=11, pady=10)
+        self.help_button.grid(row=10, pady=10)
 
     def check_num(self):
         starting_questions = self.amount_questions_entry.get()
@@ -105,9 +100,9 @@ class Start:
 
         # change background to white (for testing purposes) ...
         self.low_num_entry.config(bg="white")
-        self.entry_error_frame.config(text="")
+        self.entry_error_label.config(text="")
         self.high_num_entry.config(bg="white")
-        self.entry_error_frame.config(text="")
+        self.entry_error_label.config(text="")
         self.amount_questions_entry.config(bg="white")
         self.amount_error_label.config(text="")
 
@@ -130,12 +125,11 @@ class Start:
                                  "is 50."
             elif starting_questions < 0:
                 has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is 1"
+                amount_feedback = "Sorry the least you " \
+                                  "can start with is 1"
             elif starting_questions > 50:
                 has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
-                                 "is 50."
+                amount_feedback = "Too high! 50 questions or less " \
 
         except ValueError:
             has_errors = "yes"
@@ -143,11 +137,11 @@ class Start:
 
         if has_errors == "yes":
             self.low_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
+            self.entry_error_label.config(text=error_feedback)
             self.high_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
+            self.entry_error_label.config(text=error_feedback)
             self.amount_questions_entry.config(bg=error_back)
-            self.amount_error_label.config(text=error_feedback)
+            self.amount_error_label.config(text=amount_feedback)
 
     def to_game(self, buttons):
 
@@ -180,9 +174,9 @@ class Start:
 
         # change background to white (for testing purposes) ...
         self.low_num_entry.config(bg="white")
-        # self.entry_error_frame.config(text="")
+        self.entry_error_label.config(text="")
         self.high_num_entry.config(bg="white")
-        # self.entry_error_frame.config(text="")
+        self.entry_error_label.config(text="")
         self.amount_questions_entry.config(bg="white")
         self.amount_error_label.config(text="")
 
@@ -201,11 +195,11 @@ class Start:
                                  "is 50."
             elif starting_questions < 0:
                 has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is 1"
+                amount_feedback = "Sorry the least you " \
+                                  "can start with is 1"
             elif starting_questions > 50:
                 has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
+                amount_feedback = "Too high! The highest you can use " \
                                  "is 50."
 
         except ValueError:
@@ -214,11 +208,11 @@ class Start:
 
         if has_errors == "yes":
             self.low_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
+            self.entry_error_label.config(text=error_feedback)
             self.high_num_entry.config(bg=error_back)
-            self.entry_error_frame.config(text=error_feedback)
+            self.entry_error_label.config(text=error_feedback)
             self.amount_questions_entry.config(bg=error_back)
-            self.amount_error_label.config(text=error_feedback)
+            self.amount_error_label.config(text=amount_feedback)
 
         else:
             Game(self, buttons, starting_questions)
