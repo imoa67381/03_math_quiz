@@ -119,103 +119,110 @@ class Start:
                 has_errors = "yes"
                 error_feedback = "Sorry the least you " \
                                  "can start with is -20"
+                self.entry_error_label.config(text=error_feedback)
             elif starting_high_num > 50:
                 has_errors = "yes"
                 error_feedback = "Too high! The highest you can use " \
                                  "is 50."
+                self.entry_error_label.config(text=error_feedback)
             elif starting_questions < 0:
                 has_errors = "yes"
                 amount_feedback = "Sorry the least you " \
-                                  "can start with is 1"
+                                 "can start with is 1"
             elif starting_questions > 50:
                 has_errors = "yes"
                 amount_feedback = "Too high! 50 questions or less " \
 
         except ValueError:
             has_errors = "yes"
-            error_feedback = "Please enter a number (no text / decimals)"
+            amount_feedback = "Please enter a number (no text / decimals)"
 
         if has_errors == "yes":
             self.low_num_entry.config(bg=error_back)
-            self.entry_error_label.config(text=error_feedback)
             self.high_num_entry.config(bg=error_back)
-            self.entry_error_label.config(text=error_feedback)
             self.amount_questions_entry.config(bg=error_back)
             self.amount_error_label.config(text=amount_feedback)
+            return "not ok"
+
+        else:
+            return "ok"
 
     def to_game(self, buttons):
 
         # get data from entry boxes
 
-        # number of questions
-        starting_questions = self.amount_questions_entry.get()
-        starting_questions = int(starting_questions)
-        print("starting questions to check", starting_questions)
+        ok = self.check_num()
 
-        # low number
-        starting_low_num = self.low_num_entry.get()
-        starting_low_num = int(starting_low_num)
-        print("low num questions to check", starting_low_num)
-
-        # high number
-        starting_high_num = self.high_num_entry.get()
-        starting_high_num = int(starting_high_num)
-        print("high num questions to check", starting_high_num)
-
-        # Game(self, buttons, starting_questions)
-
-        # hide start up window
-        root.withdraw
-
-        # Set error background colours (and assume that there are no
-        # errors at the start...
-        error_back = "#ffafaf"
-        has_errors = "no"
-
-        # change background to white (for testing purposes) ...
-        self.low_num_entry.config(bg="white")
-        self.entry_error_label.config(text="")
-        self.high_num_entry.config(bg="white")
-        self.entry_error_label.config(text="")
-        self.amount_questions_entry.config(bg="white")
-        self.amount_error_label.config(text="")
-
-        try:
-            starting_low_num = int(starting_low_num)
-            starting_high_num = int(starting_high_num)
+        if ok == "ok":
+            # number of questions
+            starting_questions = self.amount_questions_entry.get()
             starting_questions = int(starting_questions)
+            print("starting questions to check", starting_questions)
 
-            if starting_low_num < -20:
-                has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is -20"
-            elif starting_high_num > 50:
-                has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
-                                 "is 50."
-            elif starting_questions < 0:
-                has_errors = "yes"
-                amount_feedback = "Sorry the least you " \
-                                  "can start with is 1"
-            elif starting_questions > 50:
-                has_errors = "yes"
-                amount_feedback = "Too high! The highest you can use " \
-                                 "is 50."
+            # low number
+            starting_low_num = self.low_num_entry.get()
+            starting_low_num = int(starting_low_num)
+            print("low num questions to check", starting_low_num)
 
-        except ValueError:
-            has_errors = "yes"
-            error_feedback = "Please enter a number (no text/ decimals)"
+            # high number
+            starting_high_num = self.high_num_entry.get()
+            starting_high_num = int(starting_high_num)
+            print("high num questions to check", starting_high_num)
 
-        if has_errors == "yes":
-            self.low_num_entry.config(bg=error_back)
-            self.entry_error_label.config(text=error_feedback)
-            self.high_num_entry.config(bg=error_back)
-            self.entry_error_label.config(text=error_feedback)
-            self.amount_questions_entry.config(bg=error_back)
-            self.amount_error_label.config(text=amount_feedback)
+            # Game(self, buttons, starting_questions)
 
-        else:
-            Game(self, buttons, starting_questions)
+            # hide start up window
+            root.withdraw
+
+            # Set error background colours (and assume that there are no
+            # errors at the start...
+            error_back = "#ffafaf"
+            has_errors = "no"
+
+            # change background to white (for testing purposes) ...
+            self.low_num_entry.config(bg="white")
+            self.entry_error_label.config(text="")
+            self.high_num_entry.config(bg="white")
+            self.entry_error_label.config(text="")
+            self.amount_questions_entry.config(bg="white")
+            self.amount_error_label.config(text="")
+
+            try:
+                starting_low_num = int(starting_low_num)
+                starting_high_num = int(starting_high_num)
+                starting_questions = int(starting_questions)
+
+                if starting_low_num < -20:
+                    has_errors = "yes"
+                    error_feedback = "Sorry the least you " \
+                                     "can start with is -20"
+                    self.entry_error_label.config(text=error_feedback)
+                elif starting_high_num > 50:
+                    has_errors = "yes"
+                    error_feedback = "Too high! The highest you can use " \
+                                     "is 50."
+                    self.entry_error_label.config(text=error_feedback)
+                elif starting_questions < 0:
+                    has_errors = "yes"
+                    amount_feedback = "Sorry the least you " \
+                                      "can start with is 1"
+                elif starting_questions > 50:
+                    has_errors = "yes"
+                    amount_feedback = "Too high! The highest you can use " \
+                                      "is 50."
+
+            except ValueError:
+                has_errors = "yes"
+                amount_feedback = "Please enter a number (no text/ decimals)"
+
+            if has_errors == "yes":
+                self.low_num_entry.config(bg=error_back)
+                self.high_num_entry.config(bg=error_back)
+                self.amount_questions_entry.config(bg=error_back)
+                self.amount_error_label.config(text=amount_feedback)
+
+            else:
+                Game(self, buttons, starting_questions)
 
 
 class Game:
