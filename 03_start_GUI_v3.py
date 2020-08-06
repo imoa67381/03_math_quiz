@@ -128,7 +128,7 @@ class Start:
             elif starting_questions < 0:
                 has_errors = "yes"
                 amount_feedback = "Sorry the least you " \
-                                 "can start with is 1"
+                                  "can start with is 1"
             elif starting_questions > 50:
                 has_errors = "yes"
                 amount_feedback = "Too high! 50 questions or less " \
