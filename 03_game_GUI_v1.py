@@ -6,7 +6,7 @@ import random
 class Start:
     def __init__(self, parent):
 
-        # GUI to get starting questions for quiz
+        # GUI to get questions for quiz
         self.start_frame = Frame(padx=10, pady=10)
         self.start_frame.grid()
 
@@ -17,6 +17,8 @@ class Start:
         # retrieve starting questions
         starting_questions = 50
         operations = 2
+        low = 1
+        high = 12
 
         Game(self, operations, starting_questions)
 
@@ -53,16 +55,20 @@ class Game:
 
         # Entry box... (row 2)
         self.entry_error_frame = Frame(self.game_frame)
-        self.entry_error_frame.grid(row=2)
+        self.entry_error_frame.grid(row=3)
 
-        # Balance Label (row 4)
+        self.answer_entry = Entry(self.entry_error_frame,
+                                  font="Arial 19 bold", width=3)
+        self.answer_entry.grid(row=0, column=0)
+
+        # Score Label (row 4)
 
         start_text = "Game Score:  \n "
 
-        self.balance_label = Label(self.game_frame, font="Arial 12 bold", fg="green",
-                                   text=start_text, wrap=300,
-                                   justify=LEFT)
-        self.balance_label.grid(row=4, pady=10)
+        self.score_label = Label(self.game_frame, font="Arial 12 bold", fg="green",
+                                 text=start_text, wrap=300,
+                                 justify=LEFT)
+        self.score_label.grid(row=4, pady=10)
 
         # Help and Game Stats button (row 5)
         self.help_export_frame = Frame(self.game_frame)
@@ -80,9 +86,12 @@ class Game:
 
         # Quit Button
         self.quit_button = Button(self.game_frame, text="Quit", fg="white",
-                                  bg="#66O000", font="Arial 15 bold", width=20,
+                                  bg="#660000", font="Arial 15 bold", width=20,
                                   command=self.to_quit, padx=10, pady=10)
         self.quit_button.grid(row=6, pady=10)
+
+    def to_quit(self):
+        print("hello world")
 
 
 # main routine
