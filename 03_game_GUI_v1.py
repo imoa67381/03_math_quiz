@@ -42,16 +42,21 @@ class Game:
         self.game_frame.grid()
 
         # Heading Row
-        self.heading_label = Label(self.game_frame, text="Play...",
+        self.heading_label = Label(self.game_frame, text="Play Now",
                                    font="Arial 24 bold", padx=10,
                                    pady=10)
         self.heading_label.grid(row=0)
 
         # Instructions Label
         self.instructions_label = Label(self.game_frame, wrap=300, justify=LEFT,
-                                        text="Answer the questions below",
+                                        text="Please click next",
                                         font="Arial 10", padx=10, pady=10)
         self.instructions_label.grid(row=1)
+
+        self.question_button = Button(self.game_frame, text="Please click next",
+                                      font="Arial 12 bold",
+                                      bg="old lace", fg="black")
+        self.question_button.grid(row=1)
 
         # Entry box... (row 2)
         self.entry_error_frame = Frame(self.game_frame)
@@ -85,7 +90,7 @@ class Game:
         self.stats_button.grid(row=0, column=1, padx=2)
 
         # Quit Button
-        self.quit_button = Button(self.game_frame, text="Quit", fg="white",
+        self.quit_button = Button(self.game_frame, text="Dismiss", fg="white",
                                   bg="#660000", font="Arial 15 bold", width=20,
                                   command=self.to_quit, padx=10, pady=10)
         self.quit_button.grid(row=6, pady=10)
