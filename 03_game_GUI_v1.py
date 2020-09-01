@@ -47,24 +47,36 @@ class Game:
                                    pady=10)
         self.heading_label.grid(row=0)
 
-        # Instructions Label and Question Button to generate questions (row 1)
-        self.instructions_label = Label(self.game_frame, wrap=300, justify=LEFT,
-                                        text="Please click next",
-                                        font="Arial 10", padx=10, pady=10)
-        self.instructions_label.grid(row=1)
+        # Instructions Label and Question Questions and Submit Button  (row 1)
+        self.questions_label = Label(self.game_frame, wrap=300, justify=LEFT,
+                                       text="Please click next",
+                                       font="Arial 10", padx=10, pady=10)
+        self.questions_label.grid(row=1)
 
-        self.question_button = Button(self.game_frame, text="Please click next",
-                                      font="Arial 12 bold",
-                                      bg="old lace", fg="black")
-        self.question_button.grid(row=1)
+        self.generate_questions_frame = Frame(self.game_frame)
+        self.generate_questions_frame.grid(row=1, pady=10)
+
+        #self.question_button = Button(self.generate_questions_frame, text="Please click next",
+                                     # font="Arial 15 bold",
+                                     # bg="old lace", fg="black")
+        #self.question_button.grid(row=0, column=0, padx=2)
+
+        self.answer_entry = Entry(self.generate_questions_frame,
+                                  font="Arial 15 bold", width=3)
+        self.answer_entry.grid(row=0, column=1, padx=2, pady=10)
+
+        self.submit_button = Button(self.generate_questions_frame, text="Submit",
+                                    font="Arial 15 bold",
+                                    bg="gainsboro", fg="black")
+        self.submit_button.grid(row=0, column=2, padx=2)
 
         # Entry box... (row 2)
-        self.entry_error_frame = Frame(self.game_frame)
-        self.entry_error_frame.grid(row=3)
+       # self.entry_error_frame = Frame(self.game_frame)
+        #self.entry_error_frame.grid(row=2)
 
-        self.answer_entry = Entry(self.entry_error_frame,
-                                  font="Arial 19 bold", width=3)
-        self.answer_entry.grid(row=0, column=0)
+        #self.answer_entry = Entry(self.entry_error_frame,
+                               #   font="Arial 19 bold", width=3)
+       # self.answer_entry.grid(row=0, column=0)
 
         # Score Label (row 4)
 
