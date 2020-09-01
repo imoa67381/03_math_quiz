@@ -47,7 +47,7 @@ class Game:
                                    pady=10)
         self.heading_label.grid(row=0)
 
-        # Instructions Label and Question Button to generate questions
+        # Instructions Label and Question Button to generate questions (row 1)
         self.instructions_label = Label(self.game_frame, wrap=300, justify=LEFT,
                                         text="Please click next",
                                         font="Arial 10", padx=10, pady=10)
