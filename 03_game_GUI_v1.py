@@ -47,19 +47,14 @@ class Game:
                                    pady=10)
         self.heading_label.grid(row=0)
 
-        # Instructions Label and Question Questions and Submit Button  (row 1)
-        self.questions_label = Label(self.game_frame, wrap=300, justify=LEFT,
-                                       text="Please click next",
-                                       font="Arial 10", padx=10, pady=10)
-        self.questions_label.grid(row=1)
-
+        # Questions Label, Entry box and Submit Button  (row 1)
         self.generate_questions_frame = Frame(self.game_frame)
         self.generate_questions_frame.grid(row=1, pady=10)
 
-        #self.question_button = Button(self.generate_questions_frame, text="Please click next",
-                                     # font="Arial 15 bold",
-                                     # bg="old lace", fg="black")
-        #self.question_button.grid(row=0, column=0, padx=2)
+        self.questions_label = Label(self.generate_questions_frame, wrap=300, justify=LEFT,
+                                     text="Please click next",
+                                     font="Arial 10", padx=10, pady=10)
+        self.questions_label.grid(row=0, column=0)
 
         self.answer_entry = Entry(self.generate_questions_frame,
                                   font="Arial 15 bold", width=3)
@@ -70,26 +65,24 @@ class Game:
                                     bg="gainsboro", fg="black")
         self.submit_button.grid(row=0, column=2, padx=2)
 
-        # Entry box... (row 2)
-       # self.entry_error_frame = Frame(self.game_frame)
-        #self.entry_error_frame.grid(row=2)
+        # Next Button (row 2)
+        self.next_button = Button(self.game_frame, text="Next",
+                                  font="Arial 15 bold",
+                                  bg="green", fg="white", width=25)
+        self.next_button.grid(row=2)
 
-        #self.answer_entry = Entry(self.entry_error_frame,
-                               #   font="Arial 19 bold", width=3)
-       # self.answer_entry.grid(row=0, column=0)
+        # Score Label (row 3)
 
-        # Score Label (row 4)
-
-        start_text = "Game Score:  \n "
+        start_text = "Math Quiz Score:  \n "
 
         self.score_label = Label(self.game_frame, font="Arial 12 bold", fg="green",
                                  text=start_text, wrap=300,
                                  justify=LEFT)
-        self.score_label.grid(row=4, pady=10)
+        self.score_label.grid(row=3, pady=10)
 
         # Help and Game Stats button (row 5)
         self.help_export_frame = Frame(self.game_frame)
-        self.help_export_frame.grid(row=5, pady=10)
+        self.help_export_frame.grid(row=4, pady=10)
 
         self.help_button = Button(self.help_export_frame, text="Help / Rules",
                                   font="Arial 15 bold",
@@ -101,11 +94,15 @@ class Game:
                                    bg="#003366", fg="white")
         self.stats_button.grid(row=0, column=1, padx=2)
 
+        # Disable buttons at start
+        self.submit_button.config(state=DISABLED)
+        self.stats_button.config(state=DISABLED)
+
         # Quit Button
         self.quit_button = Button(self.game_frame, text="Dismiss", fg="white",
                                   bg="#660000", font="Arial 15 bold", width=20,
                                   command=self.to_quit, padx=10, pady=10)
-        self.quit_button.grid(row=6, pady=10)
+        self.quit_button.grid(row=5, pady=10)
 
     def to_quit(self):
         print("hello world")
