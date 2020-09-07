@@ -45,9 +45,11 @@ class Help:
                                  font="arial 14 bold")
         self.how_heading.grid(row=0)
 
-        help_text = "Enter the numbers you want the questions to be between. If the numbers "\
-                    "you entered are too high, you will need to change it. Then enter the  "\
-                    "amount of questions you want. Then select either Addition or Subtraction for your "\
+        help_text = "Enter the numbers you want the questions to be between. "\
+                    "If the numbers you entered are too high, " \
+                    "you will need to change it. Then enter the  "\
+                    "amount of questions you want." \
+                    "Then select either Addition or Subtraction for your "\
                     "math questions. Every correct answer you get right, your score will go up "\
 
         # Help text (label, row 1)
