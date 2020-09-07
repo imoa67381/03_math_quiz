@@ -16,18 +16,18 @@ class Start:
     def to_game(self):
         # retrieve starting questions
         starting_questions = 50
-        operations = 2
-        low = 1
-        high = 12
+        operations = 4
+        low_num = 1
+        high_num = 12
 
-        Game(self, operations, starting_questions, low, high)
+        Game(self, operations, starting_questions, low_num, high_num)
 
         # hide start up window
         root.withdraw()
 
 
 class Game:
-    def __init__(self, partner, operations, starting_questions, low, high):
+    def __init__(self, partner, operations, starting_questions, low_num, high_num):
         print(operations)
         print(starting_questions)
 
@@ -106,14 +106,22 @@ class Game:
 
     def generate_questions(self):
         # retrieve the users input
-        low = self.balance.get
-        high = self.balance.get
+        low_num = self.balance.get()
+        high_num = self.balance.get()
 
+        # generate questions
+        ops = ['+', '-', '*', '/']
+        operator = random.choice(ops)
+        num_1 = random.randint(low_num, high_num)
+        num_2 = random.randint(low_num, high_num)
 
+        question = ("{} {} {}".format(num_1, operator, num_2))
+        answer = eval(question)
 
+        display_question = "{} {} {} = ".format(num_1, operator, num_2)
 
-
-
+        # Edit label so user can see their balance
+        self.questions_label.configure(text=display_question)
 
     def to_quit(self):
         print("hello world")

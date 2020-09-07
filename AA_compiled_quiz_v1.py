@@ -70,7 +70,7 @@ class Start:
         # Addition button ...
         self.addition_button = Button(self.buttons_frame, text="Addition",
                                       command=lambda: self.to_game(1),
-                                      font=button_font, bg="MistyRose2", width=10)
+                                      font=button_font, bg="Lavender", width=10)
         self.addition_button.grid(row=8, column=1, padx=5, pady=10)
 
         # Subtraction button...
@@ -79,14 +79,26 @@ class Start:
                                          font=button_font, bg="PeachPuff", width=10)
         self.subtraction_button.grid(row=9, column=1, padx=5, pady=10)
 
+        # Multiplication Button ...
+        self.multiplication_button = Button(self.buttons_frame, text="Multiplication",
+                                      command=lambda: self.to_game(3),
+                                      font=button_font, bg="MistyRose2", width=10)
+        self.multiplication_button.grid(row=10, column=1, padx=5, pady=10)
+
+        # Division Button ...
+        self.division_button = Button(self.buttons_frame, text="Division",
+                                      command=lambda: self.to_game(4),
+                                      font=button_font, bg="light cyan", width=10)
+        self.division_button.grid(row=11, column=1, padx=5, pady=10)
+
         # Disable all stakes buttons at start
         self.addition_button = Button(state=DISABLED)
         self.subtraction_button = Button(state=DISABLED)
 
-        # Help Button (row 10)
+        # Help Button (row 11)
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=10, pady=10)
+        self.help_button.grid(row=12, pady=10)
 
     def check_num(self):
         starting_questions = self.amount_questions_entry.get()
@@ -222,11 +234,11 @@ class Start:
                 self.amount_error_label.config(text=amount_feedback)
 
             else:
-                Game(self, buttons, starting_questions)
+                Game(self, buttons, starting_questions, starting_low_num, starting_high_num)
 
 
 class Game:
-    def __init__(self, partner, operations, starting_questions):
+    def __init__(self, partner, operations, starting_questions, starting_low_num, starting_high_num):
         print(operations)
         print(starting_questions)
 
@@ -264,10 +276,10 @@ class Game:
                                     bg="gainsboro", fg="black")
         self.submit_button.grid(row=0, column=2, padx=2)
 
-        # Next Button (row 2)
+        # Next Button goes here(row 2)
         self.next_button = Button(self.game_frame, text="Next",
                                   font="Arial 15 bold",
-                                  bg="green", fg="white", width=25)
+                                  bg="green", fg="white", width=25, command=self.generate_questions)
         self.next_button.grid(row=2)
 
         # Score Label (row 3)
@@ -303,11 +315,27 @@ class Game:
                                   command=self.to_quit, padx=10, pady=10)
         self.quit_button.grid(row=5, pady=10)
 
-    def to_help(self):
-        get_help = Help(self)
+    def generate_questions(self):
+        # retrieve the users input
+        low_num = self.balance.get()
+        high_num = self.balance.get()
+
+        # generate questions
+        ops = ['+', '-', '*', '/']
+        operator = random.choice(ops)
+        num_1 = random.randint(low_num, high_num)
+        num_2 = random.randint(low_num, high_num)
+
+        question = ("{} {} {}".format(num_1, operator, num_2))
+        answer = eval(question)
+
+        display_question = "{} {} {} = ".format(num_1, operator, num_2)
+
+        # Edit label so user can see their balance
+        self.questions_label.configure(text=display_question)
 
     def to_quit(self):
-        root.destroy()
+        print("hello world")
 
 
 class Help:

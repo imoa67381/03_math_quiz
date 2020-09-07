@@ -70,7 +70,7 @@ class Start:
         # Addition button ...
         self.addition_button = Button(self.buttons_frame, text="Addition",
                                       command=lambda: self.to_game(1),
-                                      font=button_font, bg="MistyRose2", width=10)
+                                      font=button_font, bg="Lavender", width=10)
         self.addition_button.grid(row=8, column=1, padx=5, pady=10)
 
         # Subtraction button...
@@ -79,14 +79,26 @@ class Start:
                                          font=button_font, bg="PeachPuff", width=10)
         self.subtraction_button.grid(row=9, column=1, padx=5, pady=10)
 
+        # Multiplication Button ...
+        self.multiplication_button = Button(self.buttons_frame, text="Multiplication",
+                                      command=lambda: self.to_game(3),
+                                      font=button_font, bg="MistyRose2", width=10)
+        self.multiplication_button.grid(row=10, column=1, padx=5, pady=10)
+
+        # Division Button ...
+        self.division_button = Button(self.buttons_frame, text="Division",
+                                      command=lambda: self.to_game(4),
+                                      font=button_font, bg="light cyan", width=10)
+        self.division_button.grid(row=11, column=1, padx=5, pady=10)
+
         # Disable all stakes buttons at start
         self.addition_button = Button(state=DISABLED)
         self.subtraction_button = Button(state=DISABLED)
 
-        # Help Button (row 10)
+        # Help Button (row 11)
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=10, pady=10)
+        self.help_button.grid(row=12, pady=10)
 
     def check_num(self):
         starting_questions = self.amount_questions_entry.get()
