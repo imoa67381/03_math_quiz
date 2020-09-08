@@ -238,7 +238,7 @@ class Start:
 
 
 class Game:
-    def __init__(self, partner, operations, starting_questions, starting_low_num, starting_high_num):
+    def __init__(self, partner, operations, starting_questions, low_num, high_num):
         print(operations)
         print(starting_questions)
 
@@ -333,6 +333,7 @@ class Game:
 
         # Edit label so user can see their balance
         self.questions_label.configure(text=display_question)
+        self.next_button.config(state=DISABLED)
 
     def to_quit(self):
         print("hello world")

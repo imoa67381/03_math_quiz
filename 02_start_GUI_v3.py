@@ -79,23 +79,25 @@ class Start:
                                          font=button_font, bg="PeachPuff", width=10)
         self.subtraction_button.grid(row=9, column=1, padx=5, pady=10)
 
-        # Multiplication Button ...
+        # Multiplication button ...
         self.multiplication_button = Button(self.buttons_frame, text="Multiplication",
-                                      command=lambda: self.to_game(3),
-                                      font=button_font, bg="MistyRose2", width=10)
+                                            command=lambda: self.to_game(3),
+                                            font=button_font, bg="MistyRose2", width=10)
         self.multiplication_button.grid(row=10, column=1, padx=5, pady=10)
 
-        # Division Button ...
+        # Division button ...
         self.division_button = Button(self.buttons_frame, text="Division",
                                       command=lambda: self.to_game(4),
                                       font=button_font, bg="light cyan", width=10)
         self.division_button.grid(row=11, column=1, padx=5, pady=10)
 
         # Disable all stakes buttons at start
-        self.addition_button = Button(state=DISABLED)
-        self.subtraction_button = Button(state=DISABLED)
+        self.addition_button.config(state=DISABLED)
+        self.subtraction_button.config(state=DISABLED)
+        self.multiplication_button.config(state=DISABLED)
+        self.division_button.config(state=DISABLED)
 
-        # Help Button (row 11)
+        # Help Button (row 12)
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
         self.help_button.grid(row=12, pady=10)
@@ -121,6 +123,8 @@ class Start:
         # Disable all operations button in case user changes mind and
         self.addition_button.config(state=DISABLED)
         self.subtraction_button.config(state=DISABLED)
+        self.multiplication_button.config(state=DISABLED)
+        self.division_button.config(state=DISABLED)
 
         try:
             starting_low_num = int(starting_low_num)
