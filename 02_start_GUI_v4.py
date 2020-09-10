@@ -109,6 +109,8 @@ class Start:
             starting_low_num = self.low_num_entry.get()
             starting_high_num = self.high_num_entry.get()
 
+            amount_feedback = ""
+
             # Set error background colours (and assume that there are no
             # errors at the start...
             error_back = "#ffafaf"

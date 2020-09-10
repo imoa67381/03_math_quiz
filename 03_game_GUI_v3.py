@@ -126,7 +126,9 @@ class Game:
 
         # enable stats and submit button
         self.submit_button.config(state=NORMAL)
-        self.stats_button.config(state=NORMAL)
+
+    def check_answer(self):
+
 
     def to_quit(self):
         print("hello world")
