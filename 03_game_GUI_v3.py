@@ -124,6 +124,10 @@ class Game:
         self.questions_label.configure(text=display_question)
         self.next_button.config(state=DISABLED)
 
+        # enable stats and submit button
+        self.submit_button.config(state=NORMAL)
+        self.stats_button.config(state=NORMAL)
+
     def to_quit(self):
         print("hello world")
 

@@ -91,115 +91,23 @@ class Start:
                                       font=button_font, bg="light cyan", width=10)
         self.division_button.grid(row=11, column=1, padx=5, pady=10)
 
-        # Disable all stakes buttons at start
-        '''
-        self.addition_button.config(state=DISABLED)
-        self.subtraction_button.config(state=DISABLED)
-        self.multiplication_button.config(state=DISABLED)
-        self.division_button.config(state=DISABLED)
-        '''
-
         # Help Button (row 12)
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
         self.help_button.grid(row=12, pady=10)
 
-    def check_num(self):
-        starting_questions = self.amount_questions_entry.get()
-        starting_low_num = self.low_num_entry.get()
-        starting_high_num = self.high_num_entry.get()
-
-        # Set error background colours (and assume that there are no
-        # errors at the start...
-        error_back = "#ffafaf"
-        has_errors = "no"
-
-        # change background to white (for testing purposes) ...
-        self.low_num_entry.config(bg="white")
-        self.entry_error_label.config(text="")
-        self.high_num_entry.config(bg="white")
-        self.entry_error_label.config(text="")
-        self.amount_questions_entry.config(bg="white")
-        self.amount_error_label.config(text="")
-
-        # Disable all operations button in case user changes mind and
-        '''
-        self.addition_button.config(state=DISABLED)
-        self.subtraction_button.config(state=DISABLED)
-        self.multiplication_button.config(state=DISABLED)
-        self.division_button.config(state=DISABLED)
-        '''
-
-        try:
-            starting_low_num = int(starting_low_num)
-            starting_high_num = int(starting_high_num)
-            starting_questions = int(starting_questions)
-
-            if starting_low_num < -20:
-                has_errors = "yes"
-                error_feedback = "Sorry the least you " \
-                                 "can start with is -20"
-                self.entry_error_label.config(text=error_feedback)
-            elif starting_high_num > 50:
-                has_errors = "yes"
-                error_feedback = "Too high! The highest you can use " \
-                                 "is 50."
-                self.entry_error_label.config(text=error_feedback)
-            elif starting_questions < 0:
-                has_errors = "yes"
-                amount_feedback = "Sorry the least you " \
-                                  "can start with is 1"
-            elif starting_questions > 50:
-                has_errors = "yes"
-                amount_feedback = "Too high! 50 questions or less " \
-
-            elif starting_questions <= 50:
-                # enable all buttons
-                self.addition_button.config(state=NORMAL)
-                self.subtraction_button.config(state=NORMAL)
-                self.multiplication_button.config(state=NORMAL)
-                self.division_button.config(state=NORMAL)
-
-        except ValueError:
-            has_errors = "yes"
-            amount_feedback = "Please enter a number (no text / decimals)"
-
-        if has_errors == "yes":
-            self.low_num_entry.config(bg=error_back)
-            self.high_num_entry.config(bg=error_back)
-            self.amount_questions_entry.config(bg=error_back)
-            self.amount_error_label.config(text=amount_feedback)
-            return "not ok"
-
-        else:
-            return "ok"
-
     def to_game(self, buttons):
 
         # get data from entry boxes
 
-        ok = self.check_num()
+        # ok = self.check_num()
+        ok = "ok"
 
         if ok == "ok":
             # number of questions
             starting_questions = self.amount_questions_entry.get()
-            starting_questions = int(starting_questions)
-            print("starting questions to check", starting_questions)
-
-            # low number
             starting_low_num = self.low_num_entry.get()
-            starting_low_num = int(starting_low_num)
-            print("low num questions to check", starting_low_num)
-
-            # high number
             starting_high_num = self.high_num_entry.get()
-            starting_high_num = int(starting_high_num)
-            print("high num questions to check", starting_high_num)
-
-            # Game(self, buttons, starting_questions)
-
-            # hide start up window
-            root.withdraw
 
             # Set error background colours (and assume that there are no
             # errors at the start...
