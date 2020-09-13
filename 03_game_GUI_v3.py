@@ -27,14 +27,16 @@ class Start:
 
 
 class Game:
-    def __init__(self, partner, operations, starting_questions, low_num, high_num):
+    def __init__(self, partner, operations, starting_questions, low_num, high_num, check_answers):
         print(operations)
         print(starting_questions)
 
         # initialise variables
-        self.balance = IntVar()
+        self.number_questions = IntVar()
+        self.entry = IntVar()
         # Set starting balance to amount entered by user at the start of the game
-        self.balance.set(starting_questions)
+        self.number_questions.set(starting_questions)
+        self.entry.set(check_answers)
 
         # GUI Setup
         self.game_box = Toplevel()
@@ -106,8 +108,11 @@ class Game:
 
     def generate_questions(self):
         # retrieve the users input
-        low_num = self.balance.get()
-        high_num = self.balance.get()
+        low_num = self.number_questions.get()
+        high_num = self.number_questions.get()
+
+        score = 0
+        correct_answers = 0
 
         # generate questions
         ops = ['+', '-', '*', '/']
@@ -128,10 +133,12 @@ class Game:
         self.submit_button.config(state=NORMAL)
 
     def check_answer(self):
+        # retrieve the users answers
+        entry
 
 
     def to_quit(self):
-        print("hello world")
+     print("hello world")
 
 
 # main routine
