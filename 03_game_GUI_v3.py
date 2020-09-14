@@ -114,10 +114,6 @@ class Game:
         low_num = self.number_questions.get()
         high_num = self.number_questions.get()
 
-        score = 0
-        correct_answers = 0
-        number_questions = 0
-
         # Generate questions
         ops = ['+', '-', '*', '/']
         operator = random.choice(ops)
@@ -136,9 +132,48 @@ class Game:
         # enable stats and submit button
         self.submit_button.config(state=NORMAL)
 
+        score = 0
+        correct_answers = 0
+        number_questions = 0
+
+        try:
+
+            user_entry = int(input())
+            if ops == "+":
+                answer = (low_num + high_num)
+            elif ops == "-":
+                answer = (low_num - high_num)
+            elif ops == "*":
+                answer = (low_num * high_num)
+            elif ops == "/":
+                answer = (low_num / high_num)
+            if user_entry == answer:
+                print("Well done")
+                score = score + 1
+
+            else:
+                print("WRONG!")
+                print("The answer was", answer)
+
+                number_questions = number_questions + 1
+
     def check_results(self):
-        # retrieve the users answers
-        user_entry = self.user_entry.get()
+        self.amount_error_label.config(text="")
+
+        # retrieve users answer
+        correct_answers = self.correct_answer.get()
+        user_answer = self.user_entry.get()
+
+        try:
+             user_answer = int(user_answer)
+
+             if user_answer != correct_answers:
+                 correct_answer = "no"
+                 correct_answer = "Sorry this is incorrect " \
+                                    "click next to continue"
+                 self.next_button.config(state=NORMAL)
+                 self.submit_button.config(state=NORMAL)
+
 
     def to_quit(self):
      print("hello world")
