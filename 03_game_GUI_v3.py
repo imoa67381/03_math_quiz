@@ -172,8 +172,7 @@ class Game:
                  correct_answer = "Sorry this is incorrect " \
                                     "click next to continue"
                  self.next_button.config(state=NORMAL)
-                 self.submit_button.config(state=NORMAL)
-
+                 self.submit_button.config(state=DISABLED)
 
     def to_quit(self):
      print("hello world")
