@@ -20,13 +20,13 @@ class Start:
         low_num = 1
         high_num = 12
 
-        Game(self, operations, number_questions, low_num, high_num)
+        Quiz(self, operations, number_questions, low_num, high_num)
 
         # hide start up window
         root.withdraw()
 
 
-class Game:
+class Quiz:
     def __init__(self, partner, type_question, number_questions, low_num, high_num, check_answers):
         print(type_question)
         print(number_questions)
