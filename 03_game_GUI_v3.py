@@ -17,38 +17,39 @@ class Start:
         # retrieve starting questions
         number_questions = 50
         operations = 4
+
+        if operations == 4:
+            operator = "/"
+
         low_num = 1
         high_num = 12
 
-        Quiz(self, operations, number_questions, low_num, high_num)
+        Quiz(self, operator, number_questions, low_num, high_num)
 
         # hide start up window
         root.withdraw()
 
 
 class Quiz:
-    def __init__(self, partner, type_question, number_questions, low_num, high_num, check_answers):
+    def __init__(self, partner, type_question, number_questions, var_low_num, var_high_num):
         print(type_question)
         print(number_questions)
-        print(low_num)
-        print(high_num)
-        print(check_answers)
 
         # initialise variables
         self.low_num = IntVar()
-        self.low_num.set(low_num)
+        self.low_num.set(var_low_num)
 
         self.high_num = IntVar()
-        self.high_num.set(high_num)
+        self.high_num.set(var_high_num)
 
         self.number_questions = IntVar()
         self.number_questions.set(0)
 
-        self.correct_answer = IntVar
+        self.correct_answer = IntVar()
         self.correct_answer.set(0)
 
-        self.user_entry = IntVar()
-        self.user_entry.set(0)
+        # self.user_entry = IntVar()
+        # self.user_entry.set(0)
 
         self.operations =StringVar()
         self.operations.set(type_question)
@@ -73,7 +74,7 @@ class Quiz:
 
         self.questions_label = Label(self.generate_questions_frame, wrap=300, justify=LEFT,
                                      text="Please click next",
-                                     font="Arial 10", padx=10, pady=10)
+                                     font="Arial 10 bold", padx=10, pady=10)
         self.questions_label.grid(row=0, column=0)
 
         self.answer_entry = Entry(self.generate_questions_frame,
@@ -120,11 +121,13 @@ class Quiz:
 
         self.help_button = Button(self.help_export_frame, text="Help / Rules",
                                   font="Arial 15 bold",
+                                  command=self.to_help,
                                   bg="#808080", fg="white")
         self.help_button.grid(row=0, column=0, padx=2)
 
         self.stats_button = Button(self.help_export_frame, text="Math Quiz Stats...",
                                    font="Arial 15 bold",
+                                   command=self.to_stats,
                                    bg="#003366", fg="white")
         self.stats_button.grid(row=0, column=1, padx=2)
 
@@ -143,60 +146,50 @@ class Quiz:
 
     def generate_questions(self):
         # retrieve the users input
-        low_num = self.number_questions.get()
-        high_num = self.number_questions.get()
+        low_num = self.low_num.get()
+        high_num = self.high_num.get()
+
+        print("low", low_num)
+        print("high", high_num)
 
         # Generate questions
-        ops = ['+', '-', '*', '/']
-        operator = random.choice(ops)
+        operator = self.operations.get()
+
         num_1 = random.randint(low_num, high_num)
         num_2 = random.randint(low_num, high_num)
 
         if operator == "*":
-            operator = "×"
+            display_operator = "×"
+
+        elif operator == "/":
+            display_operator = "÷"
+
+            if num_1 == 0 and num_2 == 0:
+                num_1 = 1
+                num_2 = 1
+
+            mult_ans = num_1 * num_2
+            num_1 = mult_ans
+
+        else:
+            display_operator = operator
 
         question = ("{} {} {}".format(num_1, operator, num_2))
-        answer = eval(question)
-
-        display_question = "{} {} {} = ".format(num_1, operator, num_2)
 
         # Edit label so user can see their balance
+        display_question = "{} {} {} = ".format(num_1, display_operator, num_2)
         self.questions_label.configure(text=display_question)
         self.next_button.config(state=DISABLED)
 
         # enable stats and submit button
         self.submit_button.config(state=NORMAL)
 
+        answer = eval(question)
         self.correct_answer.set(answer)
 
         print("{} {}".format(display_question, answer))
 
-        score = 0
-        correct_answers = 0
-        number_questions = 0
-
-        try:
-
-            user_entry = int(input())
-            if ops == "+":
-                answer = (low_num + high_num)
-            elif ops == "-":
-                answer = (low_num - high_num)
-            elif ops == "*":
-                answer = (low_num * high_num)
-            elif ops == "/":
-                answer = (low_num / high_num)
-            if user_entry == answer:
-                print("Well done")
-                score = score + 1
-
-            else:
-                print("WRONG!")
-                print("The answer was", answer)
-
-                number_questions = number_questions + 1
-
-    def check_results(self):
+    def check_answer(self):
         # disabling the next question button
         self.next_button.config(state=DISABLED)
 
@@ -204,55 +197,51 @@ class Quiz:
         right_answer = "#00FF44"
 
         self.amount_error_label.config(text="")
-        self.user_entry.config(bg="white")
+        self.answer_entry.config(bg="white")
 
         # retrieve users answer
-        correct_answers = self.correct_answer.get()
-        user_answer = self.user_entry.get()
+        correct_answer = self.correct_answer.get()
+        user_answer = self.answer_entry.get()
 
         try:
-             user_answer = int(user_answer)
+            user_answer = int(user_answer)
 
-             if user_answer != correct_answers:
-                 correct_answer = "no"
-                 answer_check = "Sorry this is incorrect " \
-                                    "click next to continue"
-                 self.next_button.config(state=NORMAL)
-                 self.submit_button.config(state=DISABLED)
+            if user_answer != correct_answer:
+                answer_correct = "no"
+                check_answer = "Sorry this is incorrect " \
+                               "click next to continue"
+                self.next_button.config(state=NORMAL)
+                self.submit_button.config(state=DISABLED)
 
-             elif user_answer =="":
-                 correct_answer = "no"
-                 answer_check = "You're answer is can't " \
-                                "be blank, try again and click submit " \
+            elif user_answer == "":
+                answer_correct = "no"
+                check_answer = "You're answer is can't " \
+                               "be blank, try again and click submit "
+            else:
+                answer_correct = "yes"
+                check_answer = "Well done you're answer " \
+                               "is correct! Click next to " \
+                               "continue"
+                self.next_button.config(state=NORMAL)
+                self.submit_button.config(state=DISABLED)
 
-             else:
-                  correct_answer = "yes"
-                  answer_check = "Well done you're answer " \
-                                "is correct! Click next to " \
-                                 "continue"
-                  self.next_button.config(state=NORMAL)
-                  self.submit_button.config(state=DISABLED)
-
-                  self.user_entry.config(bg=correct_answer)
+                self.answer_entry.config(bg=right_answer)
 
         except ValueError:
             answer_check = "Please enter a whole number (no text / decimals)"
 
-            self.user_entry.config(bg=wrong_answer)
-            self.amount_error_label.config(text=right_answer)
+            self.answer_entry.config(bg=wrong_answer)
+        self.amount_error_label.config(text=check_answer)
 
-        # setting up for the help button
-        def to_help(self):
-            get_help = Help(self)
 
-        # so the quit button functions correctly
-        def to_quit(self):
-            root.destroy()
+    def to_help(self):
+        print("hello")
 
-        # Going to the stats function
-        def to_stats(self):
-            QuizStats()
+    def to_stats(self):
+        print("whee")
 
+    def to_quit(self):
+        root.destroy()
 
 # main routine
 if __name__ == "__main__":
