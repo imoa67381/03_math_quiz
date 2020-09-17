@@ -83,6 +83,7 @@ class Quiz:
 
         self.submit_button = Button(self.generate_questions_frame, text="Submit",
                                     font="Arial 15 bold",
+                                    command=self.check_answer,
                                     bg="gainsboro", fg="black")
         self.submit_button.grid(row=0, column=2, padx=2)
 
