@@ -234,7 +234,6 @@ class Quiz:
             self.answer_entry.config(bg=wrong_answer)
         self.amount_error_label.config(text=check_answer)
 
-
     def to_help(self):
         print("hello")
 
