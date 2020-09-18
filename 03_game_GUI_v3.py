@@ -87,6 +87,9 @@ class Quiz:
                                     bg="gainsboro", fg="black")
         self.submit_button.grid(row=0, column=2, padx=2)
 
+        # Question amount
+
+
         # Number of question
 
         self.number_questions_label = Label(self.game_frame,
@@ -98,7 +101,7 @@ class Quiz:
         # Next Button goes here(row 2)
         self.next_button = Button(self.game_frame, text="Next",
                                   font="Arial 15 bold",
-                                  bg="green", fg="white", width=25, command=self.generate_questions)
+                                  bg="green", fg="white", width=25, command=self.generate_questions(question_amount))
         self.next_button.grid(row=3)
 
         # space where the errors are displayed
@@ -186,6 +189,7 @@ class Quiz:
         self.submit_button.config(state=NORMAL)
 
         answer = eval(question)
+        answer = int(answer)
         self.correct_answer.set(answer)
 
         print("{} {}".format(display_question, answer))
@@ -194,20 +198,20 @@ class Quiz:
         # disabling the next question button
         self.next_button.config(state=DISABLED)
 
-        wrong_answer = "#ffafaf"
+        wrong_answer = "#660000"
         right_answer = "#00FF44"
 
         self.amount_error_label.config(text="")
         self.answer_entry.config(bg="white")
 
         # retrieve users answer
-        correct_answer = self.correct_answer.get()
+        answer_correct = self.correct_answer.get()
         user_answer = self.answer_entry.get()
 
         try:
             user_answer = int(user_answer)
 
-            if user_answer != correct_answer:
+            if user_answer != answer_correct:
                 answer_correct = "no"
                 check_answer = "Sorry this is incorrect " \
                                "click next to continue"
@@ -227,11 +231,11 @@ class Quiz:
                 self.submit_button.config(state=DISABLED)
 
                 self.answer_entry.config(bg=right_answer)
+                self.answer_entry.config(bg=wrong_answer)
 
         except ValueError:
             answer_check = "Please enter a whole number (no text / decimals)"
 
-            self.answer_entry.config(bg=wrong_answer)
         self.amount_error_label.config(text=check_answer)
 
     def to_help(self):

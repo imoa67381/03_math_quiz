@@ -99,6 +99,7 @@ class Start:
     def to_game(self, buttons):
 
         # get data from entry boxes
+        question_amount = self.amount_questions_entry
 
         # ok = self.check_num()
         ok = "ok"
@@ -125,11 +126,16 @@ class Start:
             self.amount_error_label.config(text="")
 
             try:
+                question_amount = int(question_amount)
                 starting_low_num = int(starting_low_num)
                 starting_high_num = int(starting_high_num)
                 starting_questions = int(starting_questions)
 
-                if starting_low_num < -20:
+                if question_amount <= 0:
+                    has_errors = "yes"
+                    amount_feedback = "Sorry the smallest amount of " \
+                                      "questions you can use is 1"
+                elif starting_low_num < -20:
                     has_errors = "yes"
                     error_feedback = "Sorry the least you " \
                                      "can start with is -20"
