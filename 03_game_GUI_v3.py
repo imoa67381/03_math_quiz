@@ -10,12 +10,12 @@ class Start:
         self.start_frame = Frame(padx=10, pady=10)
         self.start_frame.grid()
 
-        self.submit_button = Button(text="Submit", command=self.to_game)
+        self.submit_button = Button(text="Submit", command=self.to_quiz)
         self.submit_button.grid(row=0, pady=10)
 
-    def to_game(self):
+    def to_quiz(self):
         # retrieve starting questions
-        number_questions = 3
+        amount_questions = 3
         operations = 4
 
         if operations == 4:
@@ -24,16 +24,16 @@ class Start:
         low_num = 1
         high_num = 12
 
-        Quiz(self, operator, number_questions, low_num, high_num)
+        Quiz(self, operator, amount_questions, low_num, high_num)
 
         # hide start up window
         root.withdraw()
 
 
 class Quiz:
-    def __init__(self, partner, type_question, number_questions, var_low_num, var_high_num):
+    def __init__(self, partner, type_question, amount_questions, var_low_num, var_high_num):
         print(type_question)
-        print(number_questions)
+        print(amount_questions)
 
         # low number the user enters at the start
         self.low_num = IntVar()
@@ -45,7 +45,7 @@ class Quiz:
 
         # number of questions that user asks for
         self.number_questions = IntVar()
-        self.number_questions.set(number_questions)
+        self.number_questions.set(amount_questions)
 
         # number of questions answered
         self.num_answered = IntVar()
