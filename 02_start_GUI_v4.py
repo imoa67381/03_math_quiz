@@ -16,6 +16,9 @@ class Start:
                                      padx=10, pady=10)
         self.math_quiz_label.grid(row=0)
 
+        self.number_questions = IntVar()
+        self.number_questions.set(0)
+
         # Initial Instructions for numbers used in questions(row 1)
 
         math_quiz_instructions = "Enter numbers between -20 and 50 below "
@@ -126,16 +129,12 @@ class Start:
             self.amount_error_label.config(text="")
 
             try:
-                question_amount = int(question_amount)
+
                 starting_low_num = int(starting_low_num)
                 starting_high_num = int(starting_high_num)
                 starting_questions = int(starting_questions)
 
-                if question_amount <= 0:
-                    has_errors = "yes"
-                    amount_feedback = "Sorry the smallest amount of " \
-                                      "questions you can use is 1"
-                elif starting_low_num < -20:
+                if starting_low_num < -20:
                     has_errors = "yes"
                     error_feedback = "Sorry the least you " \
                                      "can start with is -20"
@@ -145,7 +144,7 @@ class Start:
                     error_feedback = "Too high! The highest you can use " \
                                      "is 50."
                     self.entry_error_label.config(text=error_feedback)
-                elif starting_questions < 0:
+                elif starting_questions <= 0:
                     has_errors = "yes"
                     amount_feedback = "Sorry the least you " \
                                       "can start with is 1"
@@ -153,6 +152,9 @@ class Start:
                     has_errors = "yes"
                     amount_feedback = "Too high! The highest you can use " \
                                       "is 50."
+
+                elif starting_questions >= 1:
+                    self.number_questions.set(starting_questions)
 
             except ValueError:
                 has_errors = "yes"
@@ -165,10 +167,10 @@ class Start:
                 self.amount_error_label.config(text=amount_feedback)
 
             else:
-                Game(self, buttons, starting_questions)
+                Quiz(self, buttons, starting_questions)
 
 
-class Game:
+class Quiz:
     def __init__(self, partner, buttons, starting_questions):
         print("operation", buttons)
         print("num questions", starting_questions)

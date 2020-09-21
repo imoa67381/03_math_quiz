@@ -15,7 +15,7 @@ class Start:
 
     def to_game(self):
         # retrieve starting questions
-        number_questions = 50
+        number_questions = 3
         operations = 4
 
         if operations == 4:
@@ -35,23 +35,28 @@ class Quiz:
         print(type_question)
         print(number_questions)
 
-        # initialise variables
+        # low number the user enters at the start
         self.low_num = IntVar()
         self.low_num.set(var_low_num)
 
+        # high number the user enters at the start
         self.high_num = IntVar()
         self.high_num.set(var_high_num)
 
+        # number of questions that user asks for
         self.number_questions = IntVar()
-        self.number_questions.set(0)
+        self.number_questions.set(number_questions)
 
+        # number of questions answered
+        self.num_answered = IntVar()
+        self.num_answered.set(0)
+
+        # number of correct answers by user
         self.correct_answer = IntVar()
         self.correct_answer.set(0)
 
-        # self.user_entry = IntVar()
-        # self.user_entry.set(0)
-
-        self.operations =StringVar()
+        # operation the user chooses at the start of the game
+        self.operations = StringVar()
         self.operations.set(type_question)
 
         # GUI Setup
@@ -68,9 +73,16 @@ class Quiz:
                                    pady=10)
         self.heading_label.grid(row=0)
 
-        # Questions Label, Entry box and Submit Button  (row 1)
+        # Number of question
+        self.number_questions_label = Label(self.game_frame,
+                                            text="Question 1",
+                                            font="Arial 12 bold",
+                                            padx=10, pady=10)
+        self.number_questions_label.grid(row=1)
+
+        # Questions Label, Entry box and Submit Button  (row 2)
         self.generate_questions_frame = Frame(self.game_frame)
-        self.generate_questions_frame.grid(row=1, pady=10)
+        self.generate_questions_frame.grid(row=2, pady=10)
 
         self.questions_label = Label(self.generate_questions_frame, wrap=300, justify=LEFT,
                                      text="Please click next",
@@ -87,21 +99,10 @@ class Quiz:
                                     bg="gainsboro", fg="black")
         self.submit_button.grid(row=0, column=2, padx=2)
 
-        # Question amount
-
-
-        # Number of question
-
-        self.number_questions_label = Label(self.game_frame,
-                                            text="Question 1",
-                                            font="Arial 12 bold",
-                                            padx=10, pady=10)
-        self.number_questions_label.grid(row=2)
-
-        # Next Button goes here(row 2)
+        # Next Button goes here(row 3)
         self.next_button = Button(self.game_frame, text="Next",
                                   font="Arial 15 bold",
-                                  bg="green", fg="white", width=25, command=self.generate_questions(question_amount))
+                                  bg="green", fg="white", width=25, command=self.generate_questions)
         self.next_button.grid(row=3)
 
         # space where the errors are displayed
@@ -110,8 +111,7 @@ class Quiz:
                                         justify=LEFT)
         self.amount_error_label.grid(row=4, columnspan=2, pady=5)
 
-        # Score Label (row 3)
-
+        # Score Label (row 5)
         start_text = "Math Quiz Score:  \n "
 
         self.score_label = Label(self.game_frame, font="Arial 12 bold", fg="green",
@@ -119,7 +119,7 @@ class Quiz:
                                  justify=LEFT)
         self.score_label.grid(row=5, pady=10)
 
-        # Help and Game Stats button (row 5)
+        # Help and Game Stats button (row 6)
         self.help_export_frame = Frame(self.game_frame)
         self.help_export_frame.grid(row=6, pady=10)
 
@@ -152,9 +152,13 @@ class Quiz:
         # retrieve the users input
         low_num = self.low_num.get()
         high_num = self.high_num.get()
+        number_questions = self.number_questions.get()
+        num_answered = num_answered.get()
 
         print("low", low_num)
         print("high", high_num)
+        print("number_questions", number_questions)
+        print("num_answered", num_answered)
 
         # Generate questions
         operator = self.operations.get()
@@ -198,7 +202,7 @@ class Quiz:
         # disabling the next question button
         self.next_button.config(state=DISABLED)
 
-        wrong_answer = "#660000"
+        wrong_answer = "#ffafaf"
         right_answer = "#00FF44"
 
         self.amount_error_label.config(text="")
@@ -218,9 +222,11 @@ class Quiz:
                 self.next_button.config(state=NORMAL)
                 self.submit_button.config(state=DISABLED)
 
+                self.answer_entry.config(bg=wrong_answer)
+
             elif user_answer == "":
                 answer_correct = "no"
-                check_answer = "You're answer is can't " \
+                check_answer = "You're answer can't " \
                                "be blank, try again and click submit "
             else:
                 answer_correct = "yes"
@@ -231,7 +237,6 @@ class Quiz:
                 self.submit_button.config(state=DISABLED)
 
                 self.answer_entry.config(bg=right_answer)
-                self.answer_entry.config(bg=wrong_answer)
 
         except ValueError:
             answer_check = "Please enter a whole number (no text / decimals)"
