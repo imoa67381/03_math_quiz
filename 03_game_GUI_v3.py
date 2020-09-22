@@ -153,12 +153,12 @@ class Quiz:
         low_num = self.low_num.get()
         high_num = self.high_num.get()
         number_questions = self.number_questions.get()
-        num_answered = num_answered.get()
+        #num_answered = num_answered.get()
 
         print("low", low_num)
         print("high", high_num)
         print("number_questions", number_questions)
-        print("num_answered", num_answered)
+        #print("num_answered", num_answered)
 
         # Generate questions
         operator = self.operations.get()
@@ -202,6 +202,9 @@ class Quiz:
         # disabling the next question button
         self.next_button.config(state=DISABLED)
 
+        # enabling the stats button when the user has entered an answer
+        self.stats_button.config(state=NORMAL)
+
         wrong_answer = "#ffafaf"
         right_answer = "#00FF44"
 
@@ -228,6 +231,7 @@ class Quiz:
                 answer_correct = "no"
                 check_answer = "You're answer can't " \
                                "be blank, try again and click submit "
+                self.amount_error_label.config(text=check_answer)
             else:
                 answer_correct = "yes"
                 check_answer = "Well done you're answer " \
@@ -241,13 +245,13 @@ class Quiz:
         except ValueError:
             answer_check = "Please enter a whole number (no text / decimals)"
 
-        self.amount_error_label.config(text=check_answer)
+        # self.amount_error_label.config(text=check_answer)
 
     def to_help(self):
-        print("hello")
+        print("help")
 
     def to_stats(self):
-        print("whee")
+        print("stats")
 
     def to_quit(self):
         root.destroy()

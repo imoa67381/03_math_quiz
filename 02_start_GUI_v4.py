@@ -99,10 +99,7 @@ class Start:
                                   bg="#808080", fg="white", font=button_font)
         self.help_button.grid(row=12, pady=10)
 
-    def to_quiz(self, buttons, amount_questions_entry):
-
-        # get data from entry boxes
-        amount_questions = self.amount_questions_entry.get()
+    def to_quiz(self, buttons):
 
         # number of questions
         amount_questions = self.amount_questions_entry.get()
@@ -150,7 +147,7 @@ class Start:
                                   "is 50."
 
             elif amount_questions >= 1:
-                self.number_questions.set(amount_questions_entry)
+                self.number_questions.set(amount_questions)
 
         except ValueError:
             has_errors = "yes"
@@ -172,8 +169,8 @@ class Start:
 
             Quiz(self, buttons, amount_questions, starting_low_num, starting_high_num)
 
-        # hide start up menu
-        root.withdraw()
+            # hide start up menu
+            root.withdraw()
 
     def to_help(self):
         print("Help")
