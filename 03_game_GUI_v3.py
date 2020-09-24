@@ -55,7 +55,10 @@ class Quiz:
         self.correct_answer = IntVar()
         self.correct_answer.set(0)
 
-        # operation the user chooses at the start of the game
+        # setting the score as an integer
+        self.score = IntVar()
+
+        # operator the user chooses at the start of the game
         self.operations = StringVar()
         self.operations.set(type_question)
 
@@ -201,7 +204,6 @@ class Quiz:
     def check_answer(self):
         # disabling the next question button
         self.next_button.config(state=DISABLED)
-
         # enabling the stats button when the user has entered an answer
         self.stats_button.config(state=NORMAL)
 
@@ -244,8 +246,6 @@ class Quiz:
 
         except ValueError:
             answer_check = "Please enter a whole number (no text / decimals)"
-
-        # self.amount_error_label.config(text=check_answer)
 
     def to_help(self):
         print("help")
